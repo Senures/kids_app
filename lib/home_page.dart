@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Card(
-              margin:EdgeInsets.all(15.0),
+              margin:EdgeInsets.all(14.0),
               child:InkWell(
                 onTap:(){
                   Navigator.push(context,MaterialPageRoute(builder: (context)=>Hayvanlar()));
