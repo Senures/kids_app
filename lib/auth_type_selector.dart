@@ -1,81 +1,100 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projem/home_page.dart';
 import 'package:flutter_signin_button/button_builder.dart';
 import 'package:projem/register_page.dart';
 import 'register_page.dart';
 import 'signin_page.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Bir kimlik doğrulama türü [Authentication Type] seçmek için
 /// bir UI [User Interface] sağlar.
 class AuthTypeSelector extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor:Colors.orange,
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        title: Text("Uygulama Giriş Ekranı",),
-      ),
-    body: Column(
-
-        //crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+        backgroundColor:Color(0xfffff3e0),
+      body:Column(
         children: [
-          //? Logo
           Container(
-           // margin: const EdgeInsets.only(bottom: 0.0),
-            height: 250.0,
-            width:250,
-            decoration: BoxDecoration(
-              image: DecorationImage(
 
-                alignment: Alignment.center,
-                image:AssetImage("resimler/balonn.png"),
-                fit: BoxFit.fill,
-              ),
-              //shape: BoxShape.circle,
+              margin:EdgeInsets.only(top:120.0,left:40.0,right:10.0),
+              child: Row(
+                children: [
+                  Image.asset("resimler/auth1.png",width:80.0,),
+                  SizedBox(width:18.0,),
+                  Text("Merhaba, hoş geldin",style:GoogleFonts.breeSerif(color:Color(0xffef9a9a),fontSize:22.0),)
+                ],
+              )),
+          SizedBox(height:34.0,),
+
+
+          Container(
+            child:TextButton.icon(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                    FirebaseAuth.instance.currentUser == null
+                        ? SignInPage()
+                        : HomePage(),
+                  ),
+                ),
+
+                icon:Icon(Icons.email_rounded,color:Colors.white,size:24.0,) ,
+                label:Text("Giriş Yap",style:GoogleFonts.breeSerif(color:Colors.white,fontSize:19.0),),),
+            width:300.0,
+            height:50.0,
+            decoration:BoxDecoration(
+              borderRadius:BorderRadius.circular(20.0),
+              color:Color(0xffffcc80),
             ),
-          ),
-          Padding(padding:EdgeInsets.all(20.0)),
-
-          //? Kayıt Ol Buttonu
+           ),
+          SizedBox(height:24.0,),
           Container(
-            child: SignInButtonBuilder(
-              icon: Icons.person_add,
-              backgroundColor: Colors.purple,
-              text: "Kayıt Ol",
-              onPressed: () => Navigator.of(context).push(
+            child:TextButton.icon(
+              onPressed: ()=> Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => RegisterPage(),
                 ),
               ),
+
+              icon:Icon(Icons.person_add,color:Colors.white,size:24.0,) ,
+              label:Text("Kayıt Ol",style:GoogleFonts.breeSerif(color:Colors.white,fontSize:19.0),),),
+            width:300.0,
+            height:50.0,
+            decoration:BoxDecoration(
+              borderRadius:BorderRadius.circular(20.0),
+              color:Color(0xffffcc80),
             ),
-            padding: const EdgeInsets.all(16.0),
-            alignment: Alignment.center,
           ),
-          //? Giriş Yap Buttonu
-          Container(
-            child: SignInButtonBuilder(
-              icon: Icons.email,
-              backgroundColor: Colors.blue,
-              text: "Giriş Yap",
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) =>
-                  FirebaseAuth.instance.currentUser == null
-                      ? SignInPage()
-                      : HomePage(),
+
+          SizedBox(height:20.0,),
+
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Center(
+
+              child: Container(
+                width:250.0,
+                height: 250,
+                decoration:BoxDecoration(
+                  color:Color(0xfffff3e0),
+                  // borderRadius:BorderRadius.circular(190.0)
                 ),
+                margin:EdgeInsets.all(20.0),
+                child:Center(child:Image.asset("resimler/auth2.png",width:180.0,)),
               ),
             ),
-            padding: const EdgeInsets.all(16.0),
-            alignment: Alignment.center,
           ),
+          SizedBox(height:5.0,),
+
+
+
         ],
-      ),
+      )
+
     );
   }
 }

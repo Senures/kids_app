@@ -4,7 +4,6 @@ import 'package:projem/sekiller.dart';
 import 'package:projem/hayvanlar.dart';
 import 'package:projem/meslekler.dart';
 import 'package:projem/meyveler.dart';
-import 'package:projem/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:projem/harfler.dart';
@@ -20,16 +19,21 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+//deneme alanı
+//  Future<SharedPreferences> pref = SharedPreferences.getInstance();
+
+//  int progress =  pref.getInt('progress')!;
+
 class _HomePageState extends State<HomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor:Colors.orange.shade200,
+        backgroundColor:Colors.grey.shade400,
         appBar: AppBar(
-          backgroundColor:Colors.orange.shade200,
-        title: Text("Uygulama anasayfa"),
+          backgroundColor:Colors.grey.shade400,
+          title: Text("İngilizce Öğreniyorum",),
          actions: [
              Builder(
                builder: (context) => IconButton(
@@ -41,210 +45,37 @@ class _HomePageState extends State<HomePage> {
                     content: Text("Başarıyla çıkış yapıldı"),
                      ));
 
-                 Navigator.pushReplacement(
-    //bunu kullanma amacımız çıkış tuşuna bastığımız halde geri tuşuna basarsak giriş yapılmış halde duracağından pushReclacement kullanılır
-    context,
-    MaterialPageRoute(
-    builder: (context) =>SignInPage(),
-    ));
-    },),
-    )
-    ],),
-    body:Container(
+                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>SignInPage(),
+                  ));//bunu kullanma amacımız çıkış tuşuna bastığımız halde geri tuşuna basarsak giriş yapılmış halde duracağından pushReclacement kullanılır
+                },),
+                 )
+              ],),
+     body:Container(
       child:GridView.count(crossAxisCount: 2,
           children: [
-            Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Harfler()));
-                },
-                splashColor:Colors.purple,
+           Column(
+             children: [
+               Container(
+                 margin:EdgeInsets.only(top:10.0,left:20.0),
+                 width:180.0,
+                 height:180.0,
+                 decoration:BoxDecoration(
+                   color:Colors.purpleAccent.shade100
+                 ),
+                 child:Container(
+                   width:50.0,
+                   height:50.0,
+                   color:Colors.red,
+                   child:Image.asset("page_images/alfabe.png",width:85.0,),
+                 ),
 
-                child:Center(
-                  child:Column(
-                    mainAxisSize:MainAxisSize.min,
-                    children: [
-                      Image.asset("page_images/alfabe.png",width:75.0,),
-                      Padding(padding:EdgeInsets.all(5.0)),
-                      Text("Harfler",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.purple,),
-                      ),
-                    ],
-                  )
-                ),
-              ),
-             ),
+               )
+             ],
+           )
 
-            Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Sayilar()));
-                },
-                splashColor:Colors.purple,
-                child:Center(
-                    child:Column(
-                      mainAxisSize:MainAxisSize.min,
-                      children: [
-                        Image.asset("page_images/sayilar.png",width:75.0,),
-                        Padding(padding:EdgeInsets.all(5.0)),
-                        Text("Sayılar",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.blue,)),
-                      ],
-                    )
-                ),
-              ),
-            ),
-            Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Meyveler()));
-                },
-                splashColor:Colors.purple,
-                child:Center(
-                    child:Column(
-                      mainAxisSize:MainAxisSize.min,
-                      children: [
-                        Image.asset("page_images/meyve.png",width:75.0,),
-                        Padding(padding:EdgeInsets.all(5.0)),
-                        Text("Meyveler",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.red,)),
-                      ],
-                    )
-                ),
-              ),
-            ),Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Sebzeler()));
-                },
-                splashColor:Colors.purple,
-                child:Center(
-                    child:Column(
-                      mainAxisSize:MainAxisSize.min,
-                      children: [
-                        Image.asset("page_images/sebze.png",width:75.0,),
-                        Padding(padding:EdgeInsets.all(5.0)),
-                        Text("Sebzeler",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.green,)),
-                      ],
-                    )
-                ),
-              ),
-            ),
-            Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Yemek()));
-                },
-                splashColor:Colors.purple,
-                child:Center(
-                    child:Column(
-                      mainAxisSize:MainAxisSize.min,
-                      children: [
-                        Image.asset("page_images/drink.png",width:75.0,),
-                        Padding(padding:EdgeInsets.all(5.0)),
-                        Text("Yeme - İçme",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.brown,)),
-                      ],
-                    )
-                ),
-              ),
-            ),
-            Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Hayvanlar()));
-                },
-                splashColor:Colors.purple,
-                child:Center(
-                    child:Column(
-                      mainAxisSize:MainAxisSize.min,
-                      children: [
-                        Image.asset("page_images/hayvan.png",width:75.0,),
-                        Padding(padding:EdgeInsets.all(5.0)),
-                        Text("Hayvanlar",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.teal,)),
-                      ],
-                    )
-                ),
-              ),
-            ),
-            Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Meslekler()));
-                },
-                splashColor:Colors.purple,
-                child:Center(
-                    child:Column(
-                      mainAxisSize:MainAxisSize.min,
-                      children: [
-                        Image.asset("page_images/job.png",width:75.0,),
-                        Padding(padding:EdgeInsets.all(5.0)),
-                        Text("Meslekler",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.indigo,)),
-                      ],
-                    )
-                ),
-              ),
-            ),
-            Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Sekiller()));
-                },
-                splashColor:Colors.purple,
-                child:Center(
-                    child:Column(
-                      mainAxisSize:MainAxisSize.min,
-                      children: [
-                        Image.asset("page_images/shapes.png",width:75.0,),
-                        Padding(padding:EdgeInsets.all(5.0)),
-                        Text("Şekiller",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.deepOrange),),
-                      ],
-                    )
-                ),
-              ),
-            ),
-            Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Vucut()));
-                },
-                splashColor:Colors.purple,
-                child:Center(
-                    child:Column(
-                      mainAxisSize:MainAxisSize.min,
-                      children: [
-                        Image.asset("page_images/body.png",width:75.0,),
-                        Padding(padding:EdgeInsets.all(5.0)),
-                        Text("Vücut",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.purpleAccent)),
-                      ],
-                    )
-                ),
-              ),
-            ),
-            Card(
-              margin:EdgeInsets.all(15.0),
-              child:InkWell(
-                onTap:(){
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Tasit()));
-                },
-                splashColor:Colors.purple,
-                child:Center(
-                    child:Column(
-                      mainAxisSize:MainAxisSize.min,
-                      children: [
-                        Image.asset("page_images/tasit.png",width:75.0,),
-                        Padding(padding:EdgeInsets.all(5.0)),
-                        Text("Taşıtlar",style:GoogleFonts.courgette(fontSize:22.0,color:Colors.cyan,)),
-                      ],
-                    )
-                ),
-              ),
-            ),
+
+
+
           ],
       ),
     )
